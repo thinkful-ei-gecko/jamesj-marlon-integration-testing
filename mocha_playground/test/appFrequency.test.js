@@ -6,13 +6,13 @@ const appFrequency = require('../appFrequency');
 
 describe('appFrequency GET /frequency', () => {
 
-  it.only('Returns 400 response if s param not provided', () => {
+  it('Returns 400 response if s param not provided', () => {
     return supertest(appFrequency)
       .get('/frequency')
       .expect(400, 'Invalid request');
   });
 
-  it.only('Returns a valid json response', () => {
+  it('Returns a valid json response', () => {
     return supertest(appFrequency)
       .get('/frequency')
       .query({s: 'thisisasupertest'})
@@ -20,7 +20,7 @@ describe('appFrequency GET /frequency', () => {
       .expect('Content-Type', /json/);
   });
   
-  it.only('Returns an object', () => {
+  it('Returns an object', () => {
     return supertest(appFrequency)
       .get('/frequency')
       .query({s: 'thisisasupertest'})
@@ -29,7 +29,7 @@ describe('appFrequency GET /frequency', () => {
       });
   });
 
-  it.only('Contains unique, average, and highest keys', () => {
+  it('Contains unique, average, and highest keys', () => {
     return supertest(appFrequency)
       .get('/frequency')
       .query({s: 'thisisasupertest'})
@@ -38,7 +38,7 @@ describe('appFrequency GET /frequency', () => {
       });
   });
 
-  it.only('Returns expected result for a given string', () => {
+  it('Returns expected result for a given string', () => {
     const correctObj = {
       t: 3,
       h: 1,
