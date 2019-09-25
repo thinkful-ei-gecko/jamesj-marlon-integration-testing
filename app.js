@@ -11,9 +11,9 @@ app.get('/apps', (req,res) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   let filteredPlaystore = [...playstore];
-  const genre = req.query.genre.toLowerCase();
+  const genre = req.query.genre ? req.query.genre.toLowerCase() : '';
   const capitalGenre = capitalizeFirstLetter(genre);
-  const genreOptions = ['Action', 'Puzzle', 'Strategy', 'Casual', 'Arcade', 'Card']
+  const genreOptions = ['Action', 'Puzzle', 'Strategy', 'Casual', 'Arcade', 'Card'];
   if(capitalGenre && genreOptions.includes(capitalGenre)){
     filteredPlaystore = filteredPlaystore.filter(app => {
       return app.Genres.includes(capitalGenre);
@@ -35,12 +35,9 @@ app.get('/apps', (req,res) => {
       });
     }
   } else if(capitalSort && !sortOptions.includes(capitalSort)) {
-    return res.send('Sort parameter must be either rating or app');
+    return res.status(400).send('Sort parameter must be either rating or app');
   }
-  console.log('/apps loaded');
-  res.json(filteredPlaystore);
+  res.status(200).json(filteredPlaystore);
 });
 
-app.listen(8000, () => {
-  console.log('Listening on Port 8000...');
-});
+module.exports = app;
