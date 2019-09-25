@@ -1,3 +1,5 @@
+'use strict';
+
 const divide = require('../index');
 const { expect } = require('chai');
 
